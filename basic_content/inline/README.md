@@ -17,7 +17,7 @@ class A
 public:
     void f1(int x); 
 
-    /**
+    /*
      * @brief 类中定义了的函数是隐式内联函数,声明要想成为内联函数，必须在实现处(定义处)加inline关键字。
      *
      * @param x
@@ -54,7 +54,8 @@ inline int Foo(int x,int y) // 函数定义
 }
 
 // 定义处加inline关键字，推荐这种写法！
-inline void A::f1(int x){
+inline void A::f1(int x)
+{
 
 }
 
@@ -77,13 +78,13 @@ int main()
 
 内联能提高函数效率，但并不是所有的函数都定义成内联函数！内联是以代码膨胀(复制)为代价，仅仅省去了函数调用的开销，从而提高函数的执行效率。
 
-- 如果执行函数体内代码的时间相比于函数调用的开销较大，那么效率的收货会更少！
+- 如果执行函数体内代码的时间相比于函数调用的开销较大，那么效率的收获会更少！
 
 - 另一方面，每一处内联函数的调用都要复制代码，将使程序的总代码量增大，消耗更多的内存空间。
 
 以下情况不宜用内联：
 
-（1）如果函数体内的代码比较长，使得内联将导致内存消耗代价比较高。
+（1）如果函数体内的代码比较长，使用内联将导致内存消耗代价比较高。
 
 （2）如果函数体内出现循环，那么执行函数体内代码的时间要比函数调用的开销大。
 
@@ -96,8 +97,8 @@ int main()
 ```c++
 #include <iostream>  
 using namespace std;
-class Base
-{
+
+class Base {
 public:
     inline virtual void who()
     {
@@ -105,8 +106,8 @@ public:
     }
     virtual ~Base() {}
 };
-class Derived : public Base
-{
+
+class Derived : public Base {
 public:
     inline void who()  // 不写inline时隐式内联
     {
